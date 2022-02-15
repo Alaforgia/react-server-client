@@ -7,10 +7,23 @@ function CreatureForm() {
   const addCreature = (event) => {
     event.preventDefault();
     console.log("Submitted");
-    //     axios.post("/creature")
-    //     .then((response)=>{
+    // axios({
+    //   method: "POST",
+    //   url: "/creature",
+    //   data: {
+    //     name: newCreatureName,
+    //     origin: newCreatureOrigin,
+    //   },
+    axios
+      .post("/creature", { name: newCreatureName, origin: newCreatureOrigin })
 
-    // })
+      .then((response) => {
+        console.log("POST response is", response);
+        // call fetchCreature()
+      })
+      .catch((error) => {
+        console.log("POST error", error);
+      });
   };
 
   return (
@@ -21,6 +34,7 @@ function CreatureForm() {
         <input id="name" onChange={(event) => setNewCreatureName(event.target.value)} />
         <label htmlFor="origin">Origin: </label>
         <input id="origin" onChange={(event) => setNewCreatureOrigin(event.target.value)} />
+        <button type="submit">Add New Creature</button>
       </form>
     </>
   );
